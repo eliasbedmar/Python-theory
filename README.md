@@ -1,2 +1,1 @@
-# Python
-Learning Python
+# Python notes
