@@ -64,15 +64,14 @@ Best practices
         * main() -> to contain the ‘default’ workflow, so the whole process can be used
 
 
-Module.py
-from time import sleep
+See module.py
 
+```buildoutcfg
+from time import sleep
 
 print("This is my file to demonstrate best practices.")
 
-
 print("The value of __name__ is:", repr(__name__))
-
 
 def process_data(data):
     print("Beginning data processing...")
@@ -81,17 +80,14 @@ def process_data(data):
     print("Data processing finished.")
     return modified_data
 
-
 def read_data_from_web():
     print("Reading data from the Web")
     data = "Data from the Web"
     return data
 
-
 def write_data_to_database(data):
     print("Writing data to database:")
     print(data)
-
 
 # Def function [entry point] with default workflow
 def main():
@@ -99,29 +95,59 @@ def main():
     modified_data=process_data(data)
     write_data_to_database(modified_data)
 
-
 if __name__ == '__main__':
     main()
 
-Script.py (calling module)
-import module as module
+```
 
+See script.py
+```buildoutcfg
+import module as module
 
 print('This is the script calling a module')
 
-
 print('Execution mode for script - value of __name__:',repr(__name__))
-
 
 #Running whole workflow from module:
 print('Running whole workflow:')
 module.main()
 
-
 #Running selected functions() from module
 inputdata = 'Input custom data'
 print('Running parts of the workflow for data',inputdata)
 
-
 modified_data=module.process_data(inputdata)
 module.write_data_to_database(modified_data)
+
+```
+
+See scope.py
+```buildoutcfg
+def scope_test():
+    def do_local():
+        spam = "local spam"
+
+    def do_nonlocal():
+        nonlocal spam
+        spam = "nonlocal spam"
+
+    def do_global():
+        global spam
+        spam = "global spam"
+
+    spam = "test spam"
+
+    do_local()
+    print("After local assignment: ", spam)
+
+    do_nonlocal()
+    print("After nonlocal assignment: ", spam)
+
+    do_global()
+    print("After global assignment: ", spam)
+
+
+scope_test()
+print("In global scope:", spam)
+
+```
